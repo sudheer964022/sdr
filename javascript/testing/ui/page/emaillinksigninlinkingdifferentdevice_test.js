@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,22 +13,23 @@
  */
 
 /**
- * @fileoverview Tests for the federated account linking page.
+ * @fileoverview Tests for the email link sign in linking different device page.
  */
 
-goog.provide('firebaseui.auth.ui.page.FederatedLinkingTest');
-goog.setTestOnly('firebaseui.auth.ui.page.FederatedLinkingTest');
+goog.provide(
+    'firebaseui.auth.ui.page.EmailLinkSignInLinkingDifferentDeviceTest');
+goog.setTestOnly(
+    'firebaseui.auth.ui.page.EmailLinkSignInLinkingDifferentDeviceTest');
 
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
 goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
 goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
-goog.require('firebaseui.auth.ui.page.FederatedLinking');
+goog.require('firebaseui.auth.ui.page.EmailLinkSignInLinkingDifferentDevice');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.testing.MockClock');
 goog.require('goog.testing.jsunit');
-goog.require('goog.userAgent');
 
 
 var mockClock;
@@ -51,10 +52,9 @@ function setUp() {
   mockClock.install();
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.FederatedLinking(
-      'user@example.com',
+  component = new firebaseui.auth.ui.page.EmailLinkSignInLinkingDifferentDevice(
       {
-        providerId: 'google.com'
+        providerId: 'facebook.com'
       },
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
@@ -78,34 +78,26 @@ function setUp() {
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
 function testInitialFocus() {
-  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
-    return;
-  }
   assertEquals(
       component.getSubmitElement(),
       goog.dom.getActiveElement(document));
 }
 
 
-function testFederatedLinking_pageEvents() {
+function testEmailLinkSignInLinkingDifferentDevice_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
   // the component in docoument.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.FederatedLinking(
-      'user@example.com',
+  component = new firebaseui.auth.ui.page.EmailLinkSignInLinkingDifferentDevice(
       {
-        providerId: 'google.com'
+        providerId: 'facebook.com'
       },
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
@@ -115,6 +107,6 @@ function testFederatedLinking_pageEvents() {
 }
 
 
-function testGetPageId() {
-  assertEquals('federatedLinking', component.getPageId());
+function testEmailLinkSignInLinkingDifferentDevice_getPageId() {
+  assertEquals('emailLinkSignInLinkingDifferentDevice', component.getPageId());
 }

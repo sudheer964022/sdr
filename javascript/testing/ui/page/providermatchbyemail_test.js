@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google Inc. All Rights Reserved.
+ * Copyright 2019 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,64 +13,63 @@
  */
 
 /**
- * @fileoverview Tests for the email link sign in confirmation page.
+ * @fileoverview Tests for the provider match by email page.
  */
 
-goog.provide('firebaseui.auth.ui.page.EmailLinkSignInConfirmationTest');
-goog.setTestOnly('firebaseui.auth.ui.page.EmailLinkSignInConfirmationTest');
+goog.provide('firebaseui.auth.ui.page.ProviderMatchByEmailTest');
+goog.setTestOnly('firebaseui.auth.ui.page.ProviderMatchByEmailTest');
 
 goog.require('firebaseui.auth.ui.element');
 goog.require('firebaseui.auth.ui.element.EmailTestHelper');
-goog.require('firebaseui.auth.ui.element.FormTestHelper');
+goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
 goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
-goog.require('firebaseui.auth.ui.page.EmailLinkSignInConfirmation');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
+goog.require('firebaseui.auth.ui.page.ProviderMatchByEmail');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.events.KeyCodes');
 goog.require('goog.testing.MockClock');
 goog.require('goog.testing.events');
 goog.require('goog.testing.jsunit');
+goog.require('goog.userAgent');
 
 
 var mockClock;
 var root;
 var component;
+var tosCallback;
+var privacyPolicyCallback;
 var emailTestHelper =
     new firebaseui.auth.ui.element.EmailTestHelper().registerTests();
-// Ignore form helper submit button click as they are already explicitly
-// tested.
-var formTestHelper = new firebaseui.auth.ui.element.FormTestHelper()
-    .excludeTests('testOnSubmitEnter_', 'testOnSubmitClick_')
-    .registerTests();
+var infoBarTestHelper =
+    new firebaseui.auth.ui.element.InfoBarTestHelper().registerTests();
 var tosPpTestHelper =
     new firebaseui.auth.ui.element.TosPpTestHelper().registerTests();
 var pageTestHelper =
     new firebaseui.auth.ui.page.PageTestHelper().registerTests();
 
+
 function setUp() {
   // Set up clock.
   mockClock = new goog.testing.MockClock();
   mockClock.install();
+  tosCallback = goog.bind(
+      firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
+      tosPpTestHelper);
+  privacyPolicyCallback = goog.bind(
+      firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
+      tosPpTestHelper);
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.EmailLinkSignInConfirmation(
+  component = new firebaseui.auth.ui.page.ProviderMatchByEmail(
       goog.bind(
           firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
           emailTestHelper),
-      goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
-          formTestHelper),
-      undefined,
-      goog.bind(
-          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
-          tosPpTestHelper),
-      goog.bind(
-          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
-          tosPpTestHelper));
+      tosCallback,
+      privacyPolicyCallback);
   component.render(root);
   emailTestHelper.setComponent(component);
-  formTestHelper.setComponent(component);
+  infoBarTestHelper.setComponent(component);
   tosPpTestHelper.setComponent(component);
   // Reset previous state of tosPp helper.
   tosPpTestHelper.resetState();
@@ -79,22 +78,21 @@ function setUp() {
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
-function testInitialFocus_emailElement() {
+function testInitialFocus() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
   assertEquals(
       component.getEmailElement(),
       goog.dom.getActiveElement(document));
 }
 
 
-function testEmailLinkSignInConfirmation_onEmailEnter() {
+function testEmail_onEnter() {
   emailTestHelper.resetState();
   assertFalse(emailTestHelper.enterPressed_);
   goog.testing.events.fireKeySequence(
@@ -103,7 +101,7 @@ function testEmailLinkSignInConfirmation_onEmailEnter() {
 }
 
 
-function testEmailLinkSignInConfirmation_onNextClick() {
+function testNextButton_onClick() {
   emailTestHelper.resetState();
   assertFalse(emailTestHelper.enterPressed_);
   goog.testing.events.fireClickSequence(component.getSubmitElement());
@@ -111,31 +109,38 @@ function testEmailLinkSignInConfirmation_onNextClick() {
 }
 
 
-function testEmailLinkSignInConfirmation_pageEvents() {
-  // Run page event tests.
-  // Dispose previously created container since test must run before rendering
-  // the component in document.
+function testProviderMatchByEmail_fullMessage() {
+  tosPpTestHelper.assertFullMessage(tosCallback, privacyPolicyCallback);
+}
+
+
+function testProviderMatchByEmail_noTosPp() {
   component.dispose();
-  // Initialize component.
-  component = new firebaseui.auth.ui.page.EmailLinkSignInConfirmation(
+  component = new firebaseui.auth.ui.page.ProviderMatchByEmail(
       goog.bind(
           firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper),
+          emailTestHelper));
+  component.render(root);
+  tosPpTestHelper.setComponent(component);
+  tosPpTestHelper.assertFullMessage(null, null);
+}
+
+
+function testProviderMatchByEmail_pageEvents() {
+  // Run page event tests.
+  // Dispose previously created container since test must run before rendering
+  // the component in docoument.
+  component.dispose();
+  // Initialize component.
+  component = new firebaseui.auth.ui.page.ProviderMatchByEmail(
       goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
-          formTestHelper),
-      undefined,
-      goog.bind(
-          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
-          tosPpTestHelper),
-      goog.bind(
-          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
-          tosPpTestHelper));
+          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
+          emailTestHelper));
   // Run all page helper tests.
   pageTestHelper.runTests(component, root);
 }
 
 
-function testEmailLinkSignInConfirmation_getPageId() {
-  assertEquals('emailLinkSignInConfirmation', component.getPageId());
+function testProviderMatchByEmail_getPageId() {
+  assertEquals('providerMatchByEmail', component.getPageId());
 }

@@ -13,19 +13,19 @@
  */
 
 /**
- * @fileoverview Tests for the email entry page.
+ * @fileoverview Tests for the password sign-in page.
  */
 
-goog.provide('firebaseui.auth.ui.page.SignInTest');
-goog.setTestOnly('firebaseui.auth.ui.page.SignInTest');
+goog.provide('firebaseui.auth.ui.page.PasswordSignInTest');
+goog.setTestOnly('firebaseui.auth.ui.page.PasswordSignInTest');
 
-goog.require('firebaseui.auth.ui.element');
 goog.require('firebaseui.auth.ui.element.EmailTestHelper');
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
 goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
+goog.require('firebaseui.auth.ui.element.PasswordTestHelper');
 goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
-goog.require('firebaseui.auth.ui.page.SignIn');
+goog.require('firebaseui.auth.ui.page.PasswordSignIn');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.events.KeyCodes');
@@ -40,13 +40,13 @@ var root;
 var component;
 var tosCallback;
 var privacyPolicyCallback;
-var emailTestHelper =
-    new firebaseui.auth.ui.element.EmailTestHelper().registerTests();
-// Ignore form helper submit button click as they are already explicitly
-// tested.
-var formTestHelper = new firebaseui.auth.ui.element.FormTestHelper()
-    .excludeTests('testOnSubmitEnter_', 'testOnSubmitClick_')
-    .registerTests();
+var emailTestHelper = new firebaseui.auth.ui.element.EmailTestHelper().
+    excludeTests('testOnEnter_', 'testOnTextChanged_').
+    registerTests();
+var passwordTestHelper =
+    new firebaseui.auth.ui.element.PasswordTestHelper().registerTests();
+var formTestHelper =
+    new firebaseui.auth.ui.element.FormTestHelper().registerTests();
 var infoBarTestHelper =
     new firebaseui.auth.ui.element.InfoBarTestHelper().registerTests();
 var tosPpTestHelper =
@@ -67,20 +67,23 @@ function setUp() {
       tosPpTestHelper);
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.SignIn(
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
       goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper),
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      undefined,
+      'user@example.com',
       tosCallback,
       privacyPolicyCallback);
   component.render(root);
   emailTestHelper.setComponent(component);
-  infoBarTestHelper.setComponent(component);
+  passwordTestHelper.setComponent(component);
   formTestHelper.setComponent(component);
+  // Reset previous state of form helper.
+  formTestHelper.resetState();
+  infoBarTestHelper.setComponent(component);
   tosPpTestHelper.setComponent(component);
   // Reset previous state of tosPp helper.
   tosPpTestHelper.resetState();
@@ -89,139 +92,146 @@ function setUp() {
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
-function testInitialFocus() {
+function testInitialFocus_email() {
   if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
     return;
   }
+  component.dispose();
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper));
+  component.render(root);
   assertEquals(
       component.getEmailElement(),
       goog.dom.getActiveElement(document));
 }
 
+function testInitialFocus_password() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
+  assertEquals(
+      component.getPasswordElement(),
+      goog.dom.getActiveElement(document));
+}
 
-function testEmail_onEnter() {
-  emailTestHelper.resetState();
-  assertFalse(emailTestHelper.enterPressed_);
+
+function testFocusToPasswordOnEmailEnter() {
   goog.testing.events.fireKeySequence(
       component.getEmailElement(), goog.events.KeyCodes.ENTER);
-  assertTrue(emailTestHelper.enterPressed_);
+  assertEquals(
+      component.getPasswordElement(),
+      goog.dom.getActiveElement(document));
 }
 
 
-function testNextButton_onClick() {
-  emailTestHelper.resetState();
-  assertFalse(emailTestHelper.enterPressed_);
-  goog.testing.events.fireClickSequence(component.getSubmitElement());
-  assertTrue(emailTestHelper.enterPressed_);
+function testSubmitOnPasswordEnter() {
+  goog.testing.events.fireKeySequence(
+      component.getPasswordElement(), goog.events.KeyCodes.ENTER);
+  formTestHelper.assertSubmitted();
 }
 
 
-function testSignIn_fullMessage() {
+function testPasswordSignIn_fullMessage() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
   component.dispose();
-  component = new firebaseui.auth.ui.page.SignIn(
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
       goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper),
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      undefined,
+      'user@example.com',
       tosCallback,
       privacyPolicyCallback,
       true);
-  component.render(root);
   tosPpTestHelper.setComponent(component);
+  component.render(root);
   tosPpTestHelper.assertFullMessage(tosCallback, privacyPolicyCallback);
 }
 
 
-function testSignIn_fullMessage_noUrl() {
+function testPasswordSignIn_fullMessage_noUrl() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
   component.dispose();
-  component = new firebaseui.auth.ui.page.SignIn(
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
       goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper),
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      undefined,
+      'user@example.com',
       null,
       null,
       true);
-  component.render(root);
   tosPpTestHelper.setComponent(component);
+  component.render(root);
   tosPpTestHelper.assertFullMessage(null, null);
 }
 
 
-function testSignIn_footerOnly() {
+function testPasswordSignIn_footer() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
   tosPpTestHelper.assertFooter(tosCallback, privacyPolicyCallback);
 }
 
 
-function testSignIn_footerOnly_noUrl() {
+function testPasswordSignIn_footer_noUrl() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
   component.dispose();
-  component = new firebaseui.auth.ui.page.SignIn(
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
       goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper),
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      undefined,
+      'user@example.com',
       null,
       null);
-  component.render(root);
   tosPpTestHelper.setComponent(component);
+  component.render(root);
   tosPpTestHelper.assertFooter(null, null);
 }
 
 
-function testSignIn_pageEvents() {
+function testPasswordSignIn_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
   // the component in docoument.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.SignIn(
+  component = new firebaseui.auth.ui.page.PasswordSignIn(
       goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper));
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper),
+      'user@example.com');
   // Run all page helper tests.
   pageTestHelper.runTests(component, root);
 }
 
 
-function testSignIn_noOnCancelClick() {
-  component.dispose();
-  // Initialize component with no onCancelClick callback.
-  component = new firebaseui.auth.ui.page.SignIn(
-      goog.bind(
-          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
-          emailTestHelper));
-  component.render(root);
-  emailTestHelper.setComponent(component);
-  // No cancel button
-  assertNull(component.getSecondaryLinkElement());
-  // Submit button should be available.
-  assertNotNull(component.getSubmitElement());
-  // Confirm pressing enter in email field will submit form.
-  emailTestHelper.resetState();
-  assertFalse(emailTestHelper.enterPressed_);
-  goog.testing.events.fireKeySequence(
-      component.getEmailElement(), goog.events.KeyCodes.ENTER);
-  assertTrue(emailTestHelper.enterPressed_);
-}
-
-
-function testSignIn_getPageId() {
-  assertEquals('signIn', component.getPageId());
+function testPasswordSignIn_getPageId() {
+  assertEquals('passwordSignIn', component.getPageId());
 }

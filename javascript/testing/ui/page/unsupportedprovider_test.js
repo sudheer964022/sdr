@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2019 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,16 +13,16 @@
  */
 
 /**
- * @fileoverview Tests for the email mismatch page.
+ * @fileoverview Tests for the unsupported provider page.
  */
 
-goog.provide('firebaseui.auth.ui.page.EmailMismatchTest');
-goog.setTestOnly('firebaseui.auth.ui.page.EmailMismatchTest');
+goog.provide('firebaseui.auth.ui.page.UnsupportedProviderTest');
+goog.setTestOnly('firebaseui.auth.ui.page.UnsupportedProviderTest');
 
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
 goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
-goog.require('firebaseui.auth.ui.page.EmailMismatch');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
+goog.require('firebaseui.auth.ui.page.UnsupportedProvider');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.testing.MockClock');
@@ -48,11 +48,8 @@ function setUp() {
   mockClock.install();
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  // Render email mismatch page with test helper onSubmit and onLinkClick
-  // test functions.
-  component = new firebaseui.auth.ui.page.EmailMismatch(
+  component = new firebaseui.auth.ui.page.UnsupportedProvider(
       'user@example.com',
-      'other@example.com',
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
           formTestHelper),
@@ -77,11 +74,7 @@ function setUp() {
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
@@ -96,15 +89,14 @@ function testInitialFocus() {
 }
 
 
-function testEmailMismatch_pageEvents() {
+function testUnsupportedProvider_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
   // the component in docoument.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.EmailMismatch(
+  component = new firebaseui.auth.ui.page.UnsupportedProvider(
       'user@example.com',
-      'other@example.com',
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
           formTestHelper),
@@ -117,5 +109,5 @@ function testEmailMismatch_pageEvents() {
 
 
 function testGetPageId() {
-  assertEquals('emailMismatch', component.getPageId());
+  assertEquals('unsupportedProvider', component.getPageId());
 }

@@ -13,22 +13,21 @@
  */
 
 /**
- * @fileoverview Tests for the password reset page.
+ * @fileoverview Tests for the password recovery page.
  */
 
-goog.provide('firebaseui.auth.ui.page.PasswordResetTest');
-goog.setTestOnly('firebaseui.auth.ui.page.PasswordResetTest');
+goog.provide('firebaseui.auth.ui.page.PasswordRecoveryTest');
+goog.setTestOnly('firebaseui.auth.ui.page.PasswordRecoveryTest');
 
+goog.require('firebaseui.auth.ui.element.EmailTestHelper');
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
 goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
-goog.require('firebaseui.auth.ui.element.NewPasswordTestHelper');
+goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
-goog.require('firebaseui.auth.ui.page.PasswordReset');
+goog.require('firebaseui.auth.ui.page.PasswordRecovery');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
-goog.require('goog.events.KeyCodes');
 goog.require('goog.testing.MockClock');
-goog.require('goog.testing.events');
 goog.require('goog.testing.jsunit');
 goog.require('goog.userAgent');
 
@@ -36,13 +35,15 @@ goog.require('goog.userAgent');
 var mockClock;
 var root;
 var component;
-var newPasswordTestHelper =
-    new firebaseui.auth.ui.element.NewPasswordTestHelper().registerTests();
-var formTestHelper = new firebaseui.auth.ui.element.FormTestHelper().
-    excludeTests('testOnLinkClick_', 'testOnLinkEnter_').
+var emailTestHelper = new firebaseui.auth.ui.element.EmailTestHelper().
+    excludeTests('testOnEnter_', 'testOnTextChanged_').
     registerTests();
+var formTestHelper =
+    new firebaseui.auth.ui.element.FormTestHelper().registerTests();
 var infoBarTestHelper =
     new firebaseui.auth.ui.element.InfoBarTestHelper().registerTests();
+var tosPpTestHelper =
+    new firebaseui.auth.ui.element.TosPpTestHelper().registerTests();
 var pageTestHelper =
     new firebaseui.auth.ui.page.PageTestHelper().registerTests();
 
@@ -53,63 +54,76 @@ function setUp() {
   mockClock.install();
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.PasswordReset(
-      'user@example.com',
+  component = new firebaseui.auth.ui.page.PasswordRecovery(
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper));
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper),
+      'user@example.com',
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
+          tosPpTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
+          tosPpTestHelper));
   component.render(root);
-  newPasswordTestHelper.setComponent(component);
+  emailTestHelper.setComponent(component);
   formTestHelper.setComponent(component);
   // Reset previous state of form helper.
   formTestHelper.resetState();
   infoBarTestHelper.setComponent(component);
+  tosPpTestHelper.setComponent(component);
+  // Reset previous state of tosPp helper.
+  tosPpTestHelper.resetState();
   pageTestHelper.setClock(mockClock).setComponent(component);
 }
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
-function testInitialFocus() {
+function testInitialFocus_email() {
   if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
     return;
   }
+  component.dispose();
+  component = new firebaseui.auth.ui.page.PasswordRecovery(
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper));
+  component.render(root);
   assertEquals(
-      component.getNewPasswordElement(),
+      component.getEmailElement(),
       goog.dom.getActiveElement(document));
 }
 
 
-function testSubmitOnNewPasswordEnter() {
-  goog.testing.events.fireKeySequence(
-      component.getNewPasswordElement(), goog.events.KeyCodes.ENTER);
-  formTestHelper.assertSubmitted();
-}
-
-
-function testPasswordReset_pageEvents() {
+function testPasswordRecovery_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
   // the component in docoument.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.PasswordReset(
-      'user@example.com',
+  component = new firebaseui.auth.ui.page.PasswordRecovery(
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper));
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper),
+      'user@example.com');
   // Run all page helper tests.
   pageTestHelper.runTests(component, root);
 }
 
 
-function testPasswordReset_getPageId() {
-  assertEquals('passwordReset', component.getPageId());
+function testPasswordRecovery_getPageId() {
+  assertEquals('passwordRecovery', component.getPageId());
 }

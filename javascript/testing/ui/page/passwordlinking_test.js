@@ -13,98 +13,116 @@
  */
 
 /**
- * @fileoverview Tests for the email change revocation page.
+ * @fileoverview Tests for the password account linking page.
  */
 
-goog.provide('firebaseui.auth.ui.page.EmailChangeRevokeTest');
-goog.setTestOnly('firebaseui.auth.ui.page.EmailChangeRevokeTest');
+goog.provide('firebaseui.auth.ui.page.PasswordLinkingTest');
+goog.setTestOnly('firebaseui.auth.ui.page.PasswordLinkingTest');
 
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
 goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
-goog.require('firebaseui.auth.ui.page.EmailChangeRevoke');
+goog.require('firebaseui.auth.ui.element.PasswordTestHelper');
+goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
+goog.require('firebaseui.auth.ui.page.PasswordLinking');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
+goog.require('goog.events.KeyCodes');
 goog.require('goog.testing.MockClock');
 goog.require('goog.testing.events');
 goog.require('goog.testing.jsunit');
+goog.require('goog.userAgent');
 
 
 var mockClock;
 var root;
 var component;
+var passwordTestHelper =
+    new firebaseui.auth.ui.element.PasswordTestHelper().registerTests();
 var formTestHelper = new firebaseui.auth.ui.element.FormTestHelper().
-    excludeTests('testOnLinkClick_', 'testOnLinkEnter_').
     registerTests();
 var infoBarTestHelper =
     new firebaseui.auth.ui.element.InfoBarTestHelper().registerTests();
+var tosPpTestHelper =
+    new firebaseui.auth.ui.element.TosPpTestHelper().registerTests();
 var pageTestHelper =
     new firebaseui.auth.ui.page.PageTestHelper().registerTests();
-
-var updateClicked;
-var onClick;
 
 
 function setUp() {
   // Set up clock.
   mockClock = new goog.testing.MockClock();
   mockClock.install();
-  updateClicked = false;
-  onClick = function() {
-    updateClicked = true;
-  };
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.EmailChangeRevoke(
+  component = new firebaseui.auth.ui.page.PasswordLinking(
       'user@example.com',
-      onClick,
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper));
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
+          tosPpTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
+          tosPpTestHelper));
   component.render(root);
+  passwordTestHelper.setComponent(component);
   formTestHelper.setComponent(component);
   // Reset previous state of form helper.
   formTestHelper.resetState();
   infoBarTestHelper.setComponent(component);
+  tosPpTestHelper.setComponent(component);
+  // Reset previous state of tosPp helper.
+  tosPpTestHelper.resetState();
   pageTestHelper.setClock(mockClock).setComponent(component);
 }
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
-function testEmailChangeRevoke_resetPassword() {
-  var link = component.getResetPasswordElement();
-  assertNotNull(link);
-  assertFalse(updateClicked);
-  goog.testing.events.fireClickSequence(link);
-  assertTrue(updateClicked);
+function testInitialFocus() {
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
+    return;
+  }
+  assertEquals(
+      component.getPasswordElement(),
+      goog.dom.getActiveElement(document));
 }
 
 
-function testEmailChangeRevoke_pageEvents() {
+function testSubmitOnPasswordEnter() {
+  goog.testing.events.fireKeySequence(
+      component.getPasswordElement(), goog.events.KeyCodes.ENTER);
+  formTestHelper.assertSubmitted();
+}
+
+
+function testPasswordLinking_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
-  // the component in document.
+  // the component in docoument.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.EmailChangeRevoke(
+  component = new firebaseui.auth.ui.page.PasswordLinking(
       'user@example.com',
-      onClick,
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
+          formTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper));
   // Run all page helper tests.
   pageTestHelper.runTests(component, root);
 }
 
 
-function testEmailChangeRevoke_getPageId() {
-  assertEquals('emailChangeRevoke', component.getPageId());
+function testPasswordLinking_getPageId() {
+  assertEquals('passwordLinking', component.getPageId());
 }

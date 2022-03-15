@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,40 +13,40 @@
  */
 
 /**
- * @fileoverview Tests for the password recovery page.
+ * @fileoverview Tests for the email link sign in confirmation page.
  */
 
-goog.provide('firebaseui.auth.ui.page.PasswordRecoveryTest');
-goog.setTestOnly('firebaseui.auth.ui.page.PasswordRecoveryTest');
+goog.provide('firebaseui.auth.ui.page.EmailLinkSignInConfirmationTest');
+goog.setTestOnly('firebaseui.auth.ui.page.EmailLinkSignInConfirmationTest');
 
+goog.require('firebaseui.auth.ui.element');
 goog.require('firebaseui.auth.ui.element.EmailTestHelper');
 goog.require('firebaseui.auth.ui.element.FormTestHelper');
-goog.require('firebaseui.auth.ui.element.InfoBarTestHelper');
 goog.require('firebaseui.auth.ui.element.TosPpTestHelper');
+goog.require('firebaseui.auth.ui.page.EmailLinkSignInConfirmation');
 goog.require('firebaseui.auth.ui.page.PageTestHelper');
-goog.require('firebaseui.auth.ui.page.PasswordRecovery');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
+goog.require('goog.events.KeyCodes');
 goog.require('goog.testing.MockClock');
+goog.require('goog.testing.events');
 goog.require('goog.testing.jsunit');
-goog.require('goog.userAgent');
 
 
 var mockClock;
 var root;
 var component;
-var emailTestHelper = new firebaseui.auth.ui.element.EmailTestHelper().
-    excludeTests('testOnEnter_', 'testOnTextChanged_').
-    registerTests();
-var formTestHelper =
-    new firebaseui.auth.ui.element.FormTestHelper().registerTests();
-var infoBarTestHelper =
-    new firebaseui.auth.ui.element.InfoBarTestHelper().registerTests();
+var emailTestHelper =
+    new firebaseui.auth.ui.element.EmailTestHelper().registerTests();
+// Ignore form helper submit button click as they are already explicitly
+// tested.
+var formTestHelper = new firebaseui.auth.ui.element.FormTestHelper()
+    .excludeTests('testOnSubmitEnter_', 'testOnSubmitClick_')
+    .registerTests();
 var tosPpTestHelper =
     new firebaseui.auth.ui.element.TosPpTestHelper().registerTests();
 var pageTestHelper =
     new firebaseui.auth.ui.page.PageTestHelper().registerTests();
-
 
 function setUp() {
   // Set up clock.
@@ -54,14 +54,14 @@ function setUp() {
   mockClock.install();
   root = goog.dom.createDom(goog.dom.TagName.DIV);
   document.body.appendChild(root);
-  component = new firebaseui.auth.ui.page.PasswordRecovery(
+  component = new firebaseui.auth.ui.page.EmailLinkSignInConfirmation(
       goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper),
+          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
+          emailTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      'user@example.com',
+      undefined,
       goog.bind(
           firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
           tosPpTestHelper),
@@ -71,9 +71,6 @@ function setUp() {
   component.render(root);
   emailTestHelper.setComponent(component);
   formTestHelper.setComponent(component);
-  // Reset previous state of form helper.
-  formTestHelper.resetState();
-  infoBarTestHelper.setComponent(component);
   tosPpTestHelper.setComponent(component);
   // Reset previous state of tosPp helper.
   tosPpTestHelper.resetState();
@@ -82,52 +79,59 @@ function setUp() {
 
 
 function tearDown() {
-  // Tear down clock.
-  mockClock.tick(Infinity);
-  mockClock.reset();
-  component.dispose();
-  goog.dom.removeNode(root);
+  pageTestHelper.tearDown();
 }
 
 
-function testInitialFocus_email() {
-  if (goog.userAgent.IE && !goog.userAgent.isDocumentModeOrHigher(9)) {
-    return;
-  }
-  component.dispose();
-  component = new firebaseui.auth.ui.page.PasswordRecovery(
-      goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper),
-      goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
-          formTestHelper));
-  component.render(root);
+function testInitialFocus_emailElement() {
   assertEquals(
       component.getEmailElement(),
       goog.dom.getActiveElement(document));
 }
 
 
-function testPasswordRecovery_pageEvents() {
+function testEmailLinkSignInConfirmation_onEmailEnter() {
+  emailTestHelper.resetState();
+  assertFalse(emailTestHelper.enterPressed_);
+  goog.testing.events.fireKeySequence(
+      component.getEmailElement(), goog.events.KeyCodes.ENTER);
+  assertTrue(emailTestHelper.enterPressed_);
+}
+
+
+function testEmailLinkSignInConfirmation_onNextClick() {
+  emailTestHelper.resetState();
+  assertFalse(emailTestHelper.enterPressed_);
+  goog.testing.events.fireClickSequence(component.getSubmitElement());
+  assertTrue(emailTestHelper.enterPressed_);
+}
+
+
+function testEmailLinkSignInConfirmation_pageEvents() {
   // Run page event tests.
   // Dispose previously created container since test must run before rendering
-  // the component in docoument.
+  // the component in document.
   component.dispose();
   // Initialize component.
-  component = new firebaseui.auth.ui.page.PasswordRecovery(
+  component = new firebaseui.auth.ui.page.EmailLinkSignInConfirmation(
       goog.bind(
-          firebaseui.auth.ui.element.FormTestHelper.prototype.onSubmit,
-          formTestHelper),
+          firebaseui.auth.ui.element.EmailTestHelper.prototype.onEnter,
+          emailTestHelper),
       goog.bind(
           firebaseui.auth.ui.element.FormTestHelper.prototype.onLinkClick,
           formTestHelper),
-      'user@example.com');
+      undefined,
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onTosLinkClick,
+          tosPpTestHelper),
+      goog.bind(
+          firebaseui.auth.ui.element.TosPpTestHelper.prototype.onPpLinkClick,
+          tosPpTestHelper));
   // Run all page helper tests.
   pageTestHelper.runTests(component, root);
 }
 
 
-function testPasswordRecovery_getPageId() {
-  assertEquals('passwordRecovery', component.getPageId());
+function testEmailLinkSignInConfirmation_getPageId() {
+  assertEquals('emailLinkSignInConfirmation', component.getPageId());
 }
