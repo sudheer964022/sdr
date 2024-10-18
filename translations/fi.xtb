@@ -22,11 +22,12 @@
 <translation id="1312824004897469797">Tapahtui verkkovirhe. Yritä myöhemmin uudelleen.</translation>
 <translation id="1315809131562953678">Anna voimassa oleva puhelinnumero.</translation>
 <translation id="1335716056288807013">Napauttamalla Vahvista vahvistat hyväksyväsi <ph name="START_LINK_1" />käyttöehdot<ph name="END_LINK" /> ja <ph name="START_LINK_2" />tietosuojakäytännön<ph name="END_LINK" />. Tekstiviesti voidaan lähettää, ja datan ja viestien käyttö voi olla maksullista.</translation>
-<translation id="137210131544215127">Anna salasana</translation>
+<translation id="137210131544215127">Lisää salasana</translation>
 <translation id="1393433815796487579">Valmis</translation>
 <translation id="1412449974349991050">Haiti</translation>
 <translation id="144766329299583285">Jos et pyytänyt kirjautumissähköpostiosoitteen vaihtamista, joku saattaa yrittää käyttää tiliäsi ja sinun pitää <ph name="START_LINK" />vaihtaa salasanasi heti<ph name="END_LINK" />.</translation>
 <translation id="1449981769524156676">Heard ja McDonaldinsaaret</translation>
+<translation id="1451880131543823984">Käyttäjällä <ph name="START_STRONG" /><ph name="EMAIL" /><ph name="END_STRONG" /> ei ole lupaa tarkastella pyydettyä sivua.</translation>
 <translation id="1479035434297790822">IP-osoitteestasi on lähetetty liian monta tilipyyntöä. Yritä uudelleen muutaman minuutin kuluttua.</translation>
 <translation id="1483249363694224399">Sri Lanka</translation>
 <translation id="1507995441600689506">Voit nyt kirjautua sisään uudella tililläsi.</translation>
@@ -44,8 +45,8 @@
 <translation id="1799407952500261728">Cookinsaaret</translation>
 <translation id="1870056762032541323">Väärä koodi. Yritä uudelleen.</translation>
 <translation id="1898579907513173256">Macao</translation>
-<translation id="1929332760123475919"><ph name="P_START" />Hei <ph name="DISPLAY_NAME" /><ph name="P_END" /></translation>
-<translation id="1966996824429980990">Poista tili</translation>
+<translation id="1912929493041975510">Salasanassa on oltava vähintään 6 merkkiä</translation>
+<translation id="1933044638365301516">Kirjaudu palvelun <ph name="STRING" /> kautta</translation>
 <translation id="1987722456379605552">Anna 6 merkin pituinen koodi, jonka lähetimme numeroon <ph name="START_LINK" /><ph name="PHONE_NUMBER" /><ph name="END_LINK" />.</translation>
 <translation id="2016421613709283485">Palauta salasana noudattamalla osoitteeseen <ph name="PH_1" /> lähetettyjä ohjeita.</translation>
 <translation id="2035855087334775326">Unkari</translation>
@@ -53,17 +54,16 @@
 <translation id="2046207054419739276">Yhdysvallat</translation>
 <translation id="2049229571938383319">Saint-Barthélemy</translation>
 <translation id="2058731785647385204">Montserrat</translation>
-<translation id="2070709910567585968">Vahvassa salasanassa on vähintään 6 merkkiä, ja se sisältää kirjaimia ja numeroita.</translation>
 <translation id="2074008538308369451">Käyttöehdot</translation>
 <translation id="2089802663554186342">Istunto päättyi</translation>
-<translation id="2108717231438756650">Iso-Britannia</translation>
+<translation id="2108717231438756650">Yhdistynyt kuningaskunta</translation>
 <translation id="2120419640334291526">Caymansaaret</translation>
 <translation id="2124070231227334770">Moldova</translation>
 <translation id="2124843735553988177">Valtuuta tarvittavat käyttöoikeudet sovellukseen kirjautumista varten.</translation>
 <translation id="2130553359919781209">Malawi</translation>
 <translation id="2187260952722791093">Vahvistettu!</translation>
 <translation id="2192561962270021282">Anna puhelinnumerosi</translation>
-<translation id="2206856445831770486">Github</translation>
+<translation id="2206856445831770486">GitHub</translation>
 <translation id="2223717216014247341">Tietosuojakäytäntö</translation>
 <translation id="2224563296468523455">Guam</translation>
 <translation id="2245182894886860848">Resurssikiintiö on loppu tai määrää koskeva rajoitus on saavutettu.</translation>
@@ -81,9 +81,8 @@
 <translation id="2375419764963116430">Bahrain</translation>
 <translation id="2392247362473363900">Sisäinen palvelinvirhe</translation>
 <translation id="2405828009195143258">Iran</translation>
-<translation id="2414459877074534554">GitHub</translation>
-<translation id="244437093285883777">Tarkistamme, ettet ole robotti…</translation>
-<translation id="2448227725017851570">Tämä koodi ei ole enää voimassa.</translation>
+<translation id="2422942582251341722">Unohditko salasanasi?</translation>
+<translation id="2446078593003901807">Ok</translation>
 <translation id="2448487988481516351">Uusi-Kaledonia</translation>
 <translation id="2451742558284013472">Monaco</translation>
 <translation id="2460064915291012298">Seychellit</translation>
@@ -152,12 +151,13 @@
 <translation id="3429213469114503705">Vatikaani</translation>
 <translation id="3434621886769337032">Gambia</translation>
 <translation id="3472358534605257432">Valmis</translation>
-<translation id="3479685026618611556">Peruuta</translation>
+<translation id="3479685026618611556">Peru</translation>
 <translation id="3481131180097895739">Tuntematon palvelinvirhe</translation>
 <translation id="3487364398525389372">Anna tilin nimi</translation>
 <translation id="3521753471343796628">Irak</translation>
 <translation id="354888504916863713">Vietnam</translation>
 <translation id="3550380781997195832">Virheellinen sähköpostiosoite</translation>
+<translation id="3552446912357282301">Pyydä valtuutusta ottamalla yhteyttä osoitteeseen <ph name="START_STRONG" /><ph name="ADMIN_EMAIL" /><ph name="END_STRONG" />.</translation>
 <translation id="3561568594856945084">Mayotte</translation>
 <translation id="3591063723610544836">Kirjaudu sisään</translation>
 <translation id="3593480381831738519">Nollaa salasana</translation>
@@ -188,7 +188,7 @@
 <translation id="4056653682525186486">Kirjaudu palvelun <ph name="XXX" /> kautta</translation>
 <translation id="4064888056475403511">Kokeile avata linkki käyttäen samaa laitetta tai selainta, jolla aloitit kirjautumisen.</translation>
 <translation id="4066104405592701692">Viro</translation>
-<translation id="4090385155496329109">Facebook</translation>
+<translation id="4147949012570877154">Poista</translation>
 <translation id="4163133799286985193">Argentiina</translation>
 <translation id="4166504762096983411">Jatkamalla vahvistat hyväksyväsi <ph name="START_LINK_1" />käyttöehdot<ph name="END_LINK" /> ja <ph name="START_LINK_2" />tietosuojakäytännön<ph name="END_LINK" />.</translation>
 <translation id="420554669252656972">Anna uusi sähköpostiosoite</translation>
@@ -213,6 +213,7 @@
 <translation id="4556476996891737119">Jordania</translation>
 <translation id="4571870355114729513">Palauta salasanasi noudattamalla osoitteeseen <ph name="START_STRONG" /><ph name="EMAIL" /><ph name="END_STRONG" /> lähetettyjä ohjeita.</translation>
 <translation id="4588392627302012849">Kirjaudu sähköpostilla</translation>
+<translation id="4595119411041064617">Kun napautat <ph name="PH_1" />, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.</translation>
 <translation id="4632709875751031323">Venäjä</translation>
 <translation id="4644169548516814280">Tämä sähköpostiosoite on jo rekisteröity toiseen tiliin.</translation>
 <translation id="4692014002063276828">Puola</translation>
@@ -227,7 +228,10 @@
 <translation id="4866990546854875813">Tähän kirjautumispyyntöön liittyvä istunto on joko vanhentunut tai tyhjennetty.</translation>
 <translation id="4871106926303956169">Turks- ja Caicossaaret</translation>
 <translation id="4877597386645466815">Lähetä koodi uudelleen: <ph name="TIME_REMAINING" /></translation>
-<translation id="4915406999072654369">Tarkista sähköpostisi</translation>
+<translation id="4900116391137165411">
+<ph name="P_START" />Sovelluksen <ph name="APP_NAME" /> tilillesi on päivitetty puhelinnumero <ph name="SECOND_FACTOR" /> kaksivaiheista vahvistusta varten.<ph name="P_END" />
+<ph name="P_START" />Jos et lisännyt tätä puhelinnumeroa kaksivaiheista vahvistusta varten, klikkaa alla olevaa linkkiä poistaaksesi sen.<ph name="P_END" />
+<ph name="P_START" /><ph name="START_LINK" /><ph name="CONFIRM_LINK" /><ph name="END_LINK" /><ph name="P_END" /></translation>
 <translation id="4923375331439013137">Toisen todennustason poistaminen epäonnistui</translation>
 <translation id="4955175001894453989">Lisää salasana</translation>
 <translation id="496366313824211679">El Salvador</translation>
@@ -242,6 +246,7 @@
 <translation id="5143657419516597442">Saint Lucia</translation>
 <translation id="521218078240459724">@string/app_name</translation>
 <translation id="5241732101105320538">Tarkista sähköpostisi</translation>
+<translation id="5255830932650472373">Uusi salasana</translation>
 <translation id="5301108536112812420">Pyyntösi vahvistaa sähköpostisiosoitteesi on vanhentunut tai linkkiä on jo käytetty.</translation>
 <translation id="5323041129469627535">Oman</translation>
 <translation id="5326139833547026317">Alankomaiden Karibia</translation>
@@ -260,7 +265,7 @@
 <translation id="5528189843379142883">Päiväntasaajan Guinea</translation>
 <translation id="5529036554155743092">Australia</translation>
 <translation id="5537884323453943551">Trinidad ja Tobago</translation>
-<translation id="5543493820882105191">Anna nimesi</translation>
+<translation id="5543493820882105191">Lisää nimesi</translation>
 <translation id="55439745111619380">Ascension-saari</translation>
 <translation id="5569341882117077010">Verkkovirhe tapahtui.</translation>
 <translation id="5581239183924693195">Kirjaudu palvelun <ph name="IDP_DISPLAY_NAME" /> kautta</translation>
@@ -309,9 +314,10 @@
 <translation id="6192657410634245771">Algeria</translation>
 <translation id="6213969168046789596">Olet antanut virheellisen salasanan liian monta kertaa. Yritä uudelleen muutaman minuutin kuluttua.</translation>
 <translation id="6216759405419177713">Norfolkinsaari</translation>
-<translation id="6245066275978703471">Puhelinnumero vahvistettu automaattisesti</translation>
-<translation id="6269083314054226194">Verkkovirhe, tarkista internetyhteys.</translation>
-<translation id="6295157125625453859">Vahvistettu!</translation>
+<translation id="6238170540438416559">Napauttamalla <ph name="PH_1" /> vahvistat hyväksyväsi seuraavan: <ph name="PP" />. Tekstiviesti voidaan lähettää, ja datan ja viestien käyttö voi olla maksullista.</translation>
+<translation id="6265373887273416711">Puhelinnumeron vahvistaminen</translation>
+<translation id="6283536862756552051">Jotta voit vaihtaa salasanasi, sinun on annettava ensin nykyinen salasanasi.</translation>
+<translation id="6299890279889400823">Takaisin</translation>
 <translation id="6316446940976157217">Intia</translation>
 <translation id="6327723482938582895">Benin</translation>
 <translation id="6338643731889005578">Jatka</translation>
@@ -324,7 +330,7 @@
 <translation id="6470057025778734988">Et enää voi kirjautua sisään tililläsi.</translation>
 <translation id="6472297146424049005">Tarkista internetyhteytesi.</translation>
 <translation id="6483116480230343278">Rekisteröityminen käynnissä…</translation>
-<translation id="6502083090260346644">Kun napautat <ph name="STRING" />, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.</translation>
+<translation id="6494734506607758748">Jotta voit vaihtaa tiliisi liittyvän sähköpostiosoitteen, sinun pitää kirjautua sisään uudelleen.</translation>
 <translation id="6508909904815637928">Vanuatu</translation>
 <translation id="6520863029476703422">Amerikan Samoa</translation>
 <translation id="6527597037551425211">Brasilia</translation>
@@ -355,6 +361,7 @@
 <translation id="6821607741326790458">Jamaika</translation>
 <translation id="6834335872619414720">GitHub</translation>
 <translation id="6845933166697056698">Pakistan</translation>
+<translation id="6852861389112775830">Käyttäjällä <ph name="START_STRONG" /><ph name="USER_IDENTIFIER" /><ph name="END_STRONG" /> ei ole lupaa tarkastella pyydettyä sivua.</translation>
 <translation id="6918319418444979243">Lähetä uudelleen</translation>
 <translation id="6920167780806379235">Syyria</translation>
 <translation id="6921505896641453739">Sähköposti</translation>
@@ -362,6 +369,7 @@
 <translation id="6951302238647056860">Tämä koodi ei ole enää voimassa.</translation>
 <translation id="6961220857430789248">Lisäohjeita sisältävä kirjautumisviesti lähetettiin osoitteeseen <ph name="STRING" />. Tarkista sähköpostisi kirjautumisen suorittamiseksi loppuun.</translation>
 <translation id="6984204927251307445">Vahvista sähköposti</translation>
+<translation id="6996552808101270965">Lue lisää</translation>
 <translation id="6999773882165218263">Etu- ja sukunimi</translation>
 <translation id="7012506961150923116">Grenada</translation>
 <translation id="7024571478138322659">Länsi-Sahara</translation>
@@ -391,6 +399,7 @@
 <translation id="7291656724505689727">Kirjaudu puhelimella</translation>
 <translation id="7320029088567935126">Yritä vahvistaa sähköpostisi uudelleen</translation>
 <translation id="7331038350037712642">Azerbaidzan</translation>
+<translation id="7359542696390093035">Ei valtuutusta</translation>
 <translation id="743266754881673808">Google</translation>
 <translation id="744894552966168763">Virheellinen sähköpostilinkki</translation>
 <translation id="7477065998516229434">Käyttöehdot</translation>
@@ -415,7 +424,6 @@
 <translation id="7926046652648626866">Kirjaudu GitHub-tilillä</translation>
 <translation id="792838323404934335">Grönlanti</translation>
 <translation id="7956645158976161232">Libya</translation>
-<translation id="8013083476285293">Google</translation>
 <translation id="8017277252219866084">Kenia</translation>
 <translation id="8028653067082554952">Tämä poistaa kaikki tiliisi liittyvät tiedot, eikä toimintoa voi kumota. Haluatko varmasti poistaa tilisi?</translation>
 <translation id="8033786138248870436">Kun napautat Vahvista, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.</translation>

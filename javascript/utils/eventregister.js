@@ -22,6 +22,7 @@ goog.provide('firebaseui.auth.EventRegister');
 
 goog.require('goog.array');
 goog.require('goog.events.EventTarget');
+goog.requireType('goog.events.Event');
 
 
 /**
@@ -137,7 +138,7 @@ firebaseui.auth.EventDispatcher = class extends goog.events.EventTarget {
   }
 
   /**
-   * @return {Element} The element corresponding to the event dispatcher.
+   * @return {!Element} The element corresponding to the event dispatcher.
    */
   getElement() {
     return this.el_;

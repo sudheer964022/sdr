@@ -28,6 +28,7 @@ goog.require('goog.object');
 goog.require('goog.testing.events');
 goog.require('goog.testing.events.Event');
 goog.require('goog.ui.Component');
+goog.requireType('goog.events.KeyCodes');
 
 
 
@@ -56,7 +57,7 @@ firebaseui.auth.ui.element.ElementTestHelper.prototype.setComponent =
 /**
  * Excludes some tests from being run.
  * @param {...string} var_arg Test names to exclude.
- * @return {firebaseui.auth.ui.element.ElementTestHelper} The test helper
+ * @return {!firebaseui.auth.ui.element.ElementTestHelper} The test helper
  *     itself.
  */
 firebaseui.auth.ui.element.ElementTestHelper.prototype.excludeTests =
@@ -69,7 +70,7 @@ firebaseui.auth.ui.element.ElementTestHelper.prototype.excludeTests =
 
 /**
  * Registers all tests related to the element into the global namespace.
- * @return {firebaseui.auth.ui.element.ElementTestHelper} The test helper
+ * @return {!firebaseui.auth.ui.element.ElementTestHelper} The test helper
  *     itself.
  */
 firebaseui.auth.ui.element.ElementTestHelper.prototype.registerTests =

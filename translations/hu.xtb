@@ -27,6 +27,7 @@
 <translation id="1412449974349991050">Haiti</translation>
 <translation id="144766329299583285">Ha nem kérte bejelentkezési e-mail-címének módosítását, akkor lehetséges, hogy valaki megpróbál hozzáférni a fiókjához. Ebben az esetben <ph name="START_LINK" />azonnal változtassa meg a jelszavát<ph name="END_LINK" />.</translation>
 <translation id="1449981769524156676">Heard-sziget és McDonald-szigetek</translation>
+<translation id="1451880131543823984">A(z) <ph name="START_STRONG" /><ph name="EMAIL" /><ph name="END_STRONG" /> e-mail-című felhasználó nem jogosult a kért oldal megtekintésére.</translation>
 <translation id="1479035434297790822">Az Ön IP-címéről túl sok fiókkérelem érkezik. Néhány perc múlva próbálja újra.</translation>
 <translation id="1483249363694224399">Srí Lanka</translation>
 <translation id="1507995441600689506">Most már bejelentkezhet új fiókjával.</translation>
@@ -44,8 +45,8 @@
 <translation id="1799407952500261728">Cook-szigetek</translation>
 <translation id="1870056762032541323">Hibás kód. Próbálja újra.</translation>
 <translation id="1898579907513173256">Makaó</translation>
-<translation id="1929332760123475919"><ph name="P_START" />Kedves <ph name="DISPLAY_NAME" />!<ph name="P_END" /></translation>
-<translation id="1966996824429980990">Fiók törlése</translation>
+<translation id="1912929493041975510">A jelszónak legalább 6 karakterből kell állnia</translation>
+<translation id="1933044638365301516">Bejelentkezés a következővel: <ph name="STRING" /></translation>
 <translation id="1987722456379605552">Adja meg a következő telefonszámra elküldött 6 számjegyű kódot: <ph name="START_LINK" /><ph name="PHONE_NUMBER" /><ph name="END_LINK" /></translation>
 <translation id="2016421613709283485">A jelszó visszaállításához kövesse az ide (<ph name="PH_1" />) elküldött utasításokat.</translation>
 <translation id="2035855087334775326">Magyarország</translation>
@@ -53,7 +54,6 @@
 <translation id="2046207054419739276">Amerikai Egyesült Államok</translation>
 <translation id="2049229571938383319">Saint-Barthélemy</translation>
 <translation id="2058731785647385204">Montserrat</translation>
-<translation id="2070709910567585968">Az erős jelszavak legalább 6 karakterből állnak, valamint betűket és számokat egyaránt tartalmaznak.</translation>
 <translation id="2074008538308369451">Általános Szerződési Feltételek</translation>
 <translation id="2089802663554186342">A munkamenet befejeződött</translation>
 <translation id="2108717231438756650">Egyesült Királyság</translation>
@@ -63,7 +63,7 @@
 <translation id="2130553359919781209">Malawi</translation>
 <translation id="2187260952722791093">Ellenőrzött!</translation>
 <translation id="2192561962270021282">Adja meg telefonszámát</translation>
-<translation id="2206856445831770486">Github</translation>
+<translation id="2206856445831770486">GitHub</translation>
 <translation id="2223717216014247341">Adatvédelmi irányelvek</translation>
 <translation id="2224563296468523455">Guam</translation>
 <translation id="2245182894886860848">Elfogyott az erőforráshoz rendelkezésre álló kvóta, vagy hamarosan eléri a megengedett értéket.</translation>
@@ -81,9 +81,8 @@
 <translation id="2375419764963116430">Bahrein</translation>
 <translation id="2392247362473363900">Belső szerverhiba.</translation>
 <translation id="2405828009195143258">Irán</translation>
-<translation id="2414459877074534554">GitHub</translation>
-<translation id="244437093285883777">Annak ellenőrzése, hogy Ön nem robot...</translation>
-<translation id="2448227725017851570">Ez a kód már nem érvényes.</translation>
+<translation id="2422942582251341722">Elfelejtette a jelszavát?</translation>
+<translation id="2446078593003901807">Rendben</translation>
 <translation id="2448487988481516351">Új-Kaledónia</translation>
 <translation id="2451742558284013472">Monaco</translation>
 <translation id="2460064915291012298">Seychelle-szigetek</translation>
@@ -158,6 +157,7 @@
 <translation id="3521753471343796628">Irak</translation>
 <translation id="354888504916863713">Vietnam</translation>
 <translation id="3550380781997195832">Az e-mail-cím helytelen.</translation>
+<translation id="3552446912357282301">Jogosultságért forduljon a következőhöz: <ph name="START_STRONG" /><ph name="ADMIN_EMAIL" /><ph name="END_STRONG" />.</translation>
 <translation id="3561568594856945084">Mayotte</translation>
 <translation id="3591063723610544836">Bejelentkezés</translation>
 <translation id="3593480381831738519">Jelszó visszaállítása</translation>
@@ -188,7 +188,7 @@
 <translation id="4056653682525186486">Bejelentkezés a következővel: <ph name="XXX" /></translation>
 <translation id="4064888056475403511">Ugyanazzal az eszközzel vagy böngészővel nyissa meg a linket, amellyel elkezdte a bejelentkezési műveletet.</translation>
 <translation id="4066104405592701692">Észtország</translation>
-<translation id="4090385155496329109">Facebook</translation>
+<translation id="4147949012570877154">Törlés</translation>
 <translation id="4163133799286985193">Argentína</translation>
 <translation id="4166504762096983411">A folytatással elfogadja <ph name="START_LINK_1" />Általános Szerződési Feltételeinket<ph name="END_LINK" /> és <ph name="START_LINK_2" />Adatvédelmi irányelveinket<ph name="END_LINK" />.</translation>
 <translation id="420554669252656972">Adja meg az új e-mail-címet</translation>
@@ -213,6 +213,7 @@
 <translation id="4556476996891737119">Jordánia</translation>
 <translation id="4571870355114729513">A jelszó visszaállításához kövesse a(z) <ph name="START_STRONG" />(<ph name="EMAIL" />)<ph name="END_STRONG" /> címre elküldött utasításokat.</translation>
 <translation id="4588392627302012849">Bejelentkezés e-mail-fiókkal</translation>
+<translation id="4595119411041064617">Ha a(z) „<ph name="PH_1" />” gombra koppint, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.</translation>
 <translation id="4632709875751031323">Oroszország</translation>
 <translation id="4644169548516814280">Az e-mail-címet egy másik fiók már használja.</translation>
 <translation id="4692014002063276828">Lengyelország</translation>
@@ -227,7 +228,10 @@
 <translation id="4866990546854875813">A bejelentkezési kérelemhez kapcsolódó munkamenet lejárt, vagy törölték.</translation>
 <translation id="4871106926303956169">Turks- és Caicos-szigetek</translation>
 <translation id="4877597386645466815">Kód újraküldése ennyi idő elteltével: <ph name="TIME_REMAINING" /></translation>
-<translation id="4915406999072654369">Ellenőrizze az e-mailjeit.</translation>
+<translation id="4900116391137165411">
+<ph name="P_START" />A(z) <ph name="APP_NAME" /> szolgáltatásban meglévő fiókja telefonszámmal frissült (<ph name="SECOND_FACTOR" />) a kétlépcsős azonosításhoz.<ph name="P_END" />
+<ph name="P_START" />Ha nem Ön adta hozzá ezt a telefonszámot a kétlépcsős azonosításhoz, a linkre kattintva eltávolíthatja.<ph name="P_END" />
+<ph name="P_START" /><ph name="START_LINK" /><ph name="CONFIRM_LINK" /><ph name="END_LINK" /><ph name="P_END" /></translation>
 <translation id="4923375331439013137">Nem sikerült eltávolítani a második lépést</translation>
 <translation id="4955175001894453989">Jelszó hozzáadása</translation>
 <translation id="496366313824211679">Salvador</translation>
@@ -242,6 +246,7 @@
 <translation id="5143657419516597442">Saint Lucia</translation>
 <translation id="521218078240459724">@string/app_name</translation>
 <translation id="5241732101105320538">Ellenőrizze az e-mailjeit.</translation>
+<translation id="5255830932650472373">Az új jelszó</translation>
 <translation id="5301108536112812420">Az e-mail-címe igazolására vonatkozó kérelem lejárt, vagy pedig már használták a linket.</translation>
 <translation id="5323041129469627535">Omán</translation>
 <translation id="5326139833547026317">Holland Karib-térség</translation>
@@ -308,9 +313,10 @@
 <translation id="6192657410634245771">Algéria</translation>
 <translation id="6213969168046789596">Túl sokszor adott meg hibás jelszót. Kérjük, néhány perc múlva próbálja újra.</translation>
 <translation id="6216759405419177713">Norfolk-sziget</translation>
-<translation id="6245066275978703471">A telefonszám automatikusan ellenőrizve</translation>
-<translation id="6269083314054226194">Hálózati hiba; ellenőrizze az internetkapcsolatot.</translation>
-<translation id="6295157125625453859">Ellenőrzött!</translation>
+<translation id="6238170540438416559">A(z) „<ph name="PH_1" />” gombra való koppintással elfogadja a következő dokumentumot: <ph name="PP" />. A rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.</translation>
+<translation id="6265373887273416711">Telefonszám igazolása</translation>
+<translation id="6283536862756552051">A jelszó módosításához előbb meg kell adnia a jelenlegi jelszavát.</translation>
+<translation id="6299890279889400823">Vissza</translation>
 <translation id="6316446940976157217">India</translation>
 <translation id="6327723482938582895">Benin</translation>
 <translation id="6338643731889005578">Folytatás</translation>
@@ -323,7 +329,7 @@
 <translation id="6470057025778734988">Többé nem fog tudni bejelentkezni a fiókkal.</translation>
 <translation id="6472297146424049005">Ellenőrizze az internetkapcsolatot.</translation>
 <translation id="6483116480230343278">Regisztráció...</translation>
-<translation id="6502083090260346644">Ha az <ph name="STRING" /> lehetőségre koppint, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.</translation>
+<translation id="6494734506607758748">A fiókjához tartozó e-mail-cím módosításához újra be kell jelentkeznie.</translation>
 <translation id="6508909904815637928">Vanuatu</translation>
 <translation id="6520863029476703422">Amerikai Szamoa</translation>
 <translation id="6527597037551425211">Brazília</translation>
@@ -354,6 +360,7 @@
 <translation id="6821607741326790458">Jamaica</translation>
 <translation id="6834335872619414720">GitHub</translation>
 <translation id="6845933166697056698">Pakisztán</translation>
+<translation id="6852861389112775830">A(z) <ph name="START_STRONG" /><ph name="USER_IDENTIFIER" /><ph name="END_STRONG" /> e-mail-című felhasználó nem jogosult a kért oldal megtekintésére.</translation>
 <translation id="6918319418444979243">Újraküldés</translation>
 <translation id="6920167780806379235">Szíria</translation>
 <translation id="6921505896641453739">E-mail</translation>
@@ -361,6 +368,7 @@
 <translation id="6951302238647056860">Ez a kód már nem érvényes.</translation>
 <translation id="6961220857430789248">A további utasításokat tartalmazó bejelentkezési e-mailt elküldtük ide: <ph name="STRING" />. A bejelentkezés befejezéséhez keresse meg az e-mailjei között.</translation>
 <translation id="6984204927251307445">E-mail-cím megerősítése</translation>
+<translation id="6996552808101270965">További információ</translation>
 <translation id="6999773882165218263">Utónév és vezetéknév</translation>
 <translation id="7012506961150923116">Grenada</translation>
 <translation id="7024571478138322659">Nyugat-Szahara</translation>
@@ -390,6 +398,7 @@
 <translation id="7291656724505689727">Bejelentkezés telefonnal</translation>
 <translation id="7320029088567935126">Próbálja újra igazolni az e-mail-címét</translation>
 <translation id="7331038350037712642">Azerbajdzsán</translation>
+<translation id="7359542696390093035">Nem jogosult</translation>
 <translation id="743266754881673808">Google</translation>
 <translation id="744894552966168763">Érvénytelen e-mail-link.</translation>
 <translation id="7477065998516229434">Általános Szerződési Feltételek</translation>
@@ -414,7 +423,6 @@
 <translation id="7926046652648626866">Bejelentkezés GitHubbal</translation>
 <translation id="792838323404934335">Grönland</translation>
 <translation id="7956645158976161232">Líbia</translation>
-<translation id="8013083476285293">Google</translation>
 <translation id="8017277252219866084">Kenya</translation>
 <translation id="8028653067082554952">Ezzel az összes fiókadatát törli, és ezt a műveletet nem vonhatja vissza. Biztosan törölni szeretné a fiókját?</translation>
 <translation id="8033786138248870436">Ha az Ellenőrzés gombra koppint, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.</translation>
